@@ -78,7 +78,8 @@ bool HAMqtt::begin(
     const IPAddress serverIp,
     const uint16_t serverPort,
     const char* username,
-    const char* password
+    const char* password,
+    const int keepAlive
 )
 {
     ARDUINOHA_DEBUG_PRINT(F("AHA: init server "))
@@ -102,6 +103,7 @@ bool HAMqtt::begin(
 
     _mqtt->setServer(serverIp, serverPort);
     _mqtt->setCallback(onMessageReceived);
+    _mqtt->setKeepAlive(keepAlive);
 
     return true;
 }
@@ -109,17 +111,19 @@ bool HAMqtt::begin(
 bool HAMqtt::begin(
     const IPAddress serverIp,
     const char* username,
-    const char* password
+    const char* password,
+    const int keepAlive
 )
 {
-    return begin(serverIp, HAMQTT_DEFAULT_PORT, username, password);
+    return begin(serverIp, HAMQTT_DEFAULT_PORT, username, password, keepAlive);
 }
 
 bool HAMqtt::begin(
     const char* serverHostname,
     const uint16_t serverPort,
     const char* username,
-    const char* password
+    const char* password,
+    const int keepAlive
 )
 {
     ARDUINOHA_DEBUG_PRINT(F("AHA: init server "))
@@ -143,6 +147,7 @@ bool HAMqtt::begin(
 
     _mqtt->setServer(serverHostname, serverPort);
     _mqtt->setCallback(onMessageReceived);
+    _mqtt->setKeepAlive(keepAlive);
 
     return true;
 }
@@ -150,10 +155,11 @@ bool HAMqtt::begin(
 bool HAMqtt::begin(
     const char* serverHostname,
     const char* username,
-    const char* password
+    const char* password,
+    const int keepAlive
 )
 {
-    return begin(serverHostname, HAMQTT_DEFAULT_PORT, username, password);
+    return begin(serverHostname, HAMQTT_DEFAULT_PORT, username, password, keepAlive);
 }
 
 bool HAMqtt::disconnect()

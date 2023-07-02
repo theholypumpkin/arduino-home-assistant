@@ -9,6 +9,7 @@
 #define HAMQTT_CALLBACK(name) void (*name)()
 #define HAMQTT_MESSAGE_CALLBACK(name) void (*name)(const char* topic, const uint8_t* payload, uint16_t length)
 #define HAMQTT_DEFAULT_PORT 1883
+#define HAMQTT_DEFUALT_KEEP_ALIVE 15
 
 #ifdef ARDUINOHA_TEST
 class PubSubClientMock;
@@ -137,7 +138,8 @@ public:
         const IPAddress serverIp,
         const uint16_t serverPort = HAMQTT_DEFAULT_PORT,
         const char* username = nullptr,
-        const char* password = nullptr
+        const char* password = nullptr,
+        const int keepAlive = HAMQTT_DEFUALT_KEEP_ALIVE
     );
 
     /**
@@ -152,7 +154,8 @@ public:
     bool begin(
         const IPAddress serverIp,
         const char* username,
-        const char* password
+        const char* password,
+        const int keepAlive = HAMQTT_DEFUALT_KEEP_ALIVE
     );
 
     /**
@@ -169,7 +172,8 @@ public:
         const char* serverHostname,
         const uint16_t serverPort = HAMQTT_DEFAULT_PORT,
         const char* username = nullptr,
-        const char* password = nullptr
+        const char* password = nullptr,
+        const int keepAlive = HAMQTT_DEFUALT_KEEP_ALIVE
     );
 
     /**
@@ -184,7 +188,8 @@ public:
     bool begin(
         const char* serverHostname,
         const char* username,
-        const char* password
+        const char* password,
+        const int keepAlive = HAMQTT_DEFUALT_KEEP_ALIVE
     );
 
     /**
